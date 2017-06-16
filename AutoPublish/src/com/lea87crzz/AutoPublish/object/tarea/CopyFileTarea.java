@@ -1,15 +1,18 @@
 package com.lea87crzz.AutoPublish.object.tarea;
 
-import com.lea87crzz.AutoPublish.object.Resultado;
-import com.lea87crzz.AutoPublish.object.ITarea;
+import java.io.File;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
-public class CopyFileTarea implements ITarea {
+import com.lea87crzz.AutoPublish.object.Resultado;
+
+public class CopyFileTarea extends Tarea {
 	
 	private String fromPath;
 	private String toPath;
 	private String fileName;
-	
-	private Resultado res=Resultado.NOT_EJECUTED;
 	
 	public CopyFileTarea() {
 	}
@@ -22,12 +25,16 @@ public class CopyFileTarea implements ITarea {
 	
 	@Override
 	public boolean ejecutar() {		
+		try{
+			Path source=new File(fromPath+fileName).toPath();
+			Path dest=new File(toPath).toPath();
+			Files.copy(source, dest.resolve(source.getFileName()),StandardCopyOption.REPLACE_EXISTING);
+			result=Resultado.OK;
+			return true;
+		} catch(Exception e){
+			result=Resultado.ERROR;
+		}
 		return false;
-	}
-
-	@Override
-	public Resultado getResultado() {
-		return res;
 	}
 
 	public String getFromPath() {
@@ -52,6 +59,11 @@ public class CopyFileTarea implements ITarea {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+	
+	@Override
+	public String getDescripcion() {
+		return "CP "+fromPath+fileName+" TO "+toPath;
 	}
 
 

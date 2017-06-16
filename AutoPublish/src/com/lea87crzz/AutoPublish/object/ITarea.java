@@ -5,4 +5,6 @@ public interface ITarea {
 	public boolean ejecutar();
 	
 	public Resultado getResultado();
+	
+	public String getDescripcion();
 }

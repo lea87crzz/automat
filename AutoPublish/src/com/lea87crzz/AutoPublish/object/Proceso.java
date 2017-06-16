@@ -17,4 +17,12 @@ public class Proceso {
 		tareas.add(tarea);
 	}
 
+	public void ejecutar() {
+		for(ITarea t:tareas){
+			System.out.println(t.getDescripcion());
+			t.ejecutar();
+		}
+		
+	}
+
 }
