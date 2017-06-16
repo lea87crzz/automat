@@ -1,5 +1,5 @@
 package com.lea87crzz.AutoPublish.object;
 
-public enum Resultado {
+public enum Result {
 	NOT_EJECUTED,OK, ERROR
 }

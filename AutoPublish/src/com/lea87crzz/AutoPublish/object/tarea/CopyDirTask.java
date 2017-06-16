@@ -4,37 +4,37 @@ import java.io.File;
 
 import org.apache.commons.io.FileUtils;
 
-import com.lea87crzz.AutoPublish.object.Resultado;
+import com.lea87crzz.AutoPublish.object.Result;
 
-public class CopyDirTarea extends Tarea {
+public class CopyDirTask extends Task {
 
 	private String fromPath;
 	private String toPath;
 
-	public CopyDirTarea() {
+	public CopyDirTask() {
 	}
 
-	public CopyDirTarea(String from, String to) {
+	public CopyDirTask(String from, String to) {
 		fromPath = from;
 		toPath = to;
 	}
 
 	@Override
-	public boolean ejecutar() {
+	public boolean execute() {
 		try {
 			File srcDir = new File(fromPath);
 			File destDir = new File(toPath);
 			FileUtils.copyDirectory(srcDir, destDir);
-			result = Resultado.OK;
+			result = Result.OK;
 			return true;
 		} catch (Exception e) {
-			result = Resultado.ERROR;
+			result = Result.ERROR;
 		}
 		return false;
 	}
 
 	@Override
-	public String getDescripcion() {
+	public String getDescription() {
 		return "CP " + fromPath + " TO " + toPath;
 	}
 

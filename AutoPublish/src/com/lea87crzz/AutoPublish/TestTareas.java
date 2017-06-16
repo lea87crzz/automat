@@ -1,44 +1,44 @@
 package com.lea87crzz.AutoPublish;
 
-import com.lea87crzz.AutoPublish.object.Proceso;
-import com.lea87crzz.AutoPublish.object.tarea.CleanDirTarea;
-import com.lea87crzz.AutoPublish.object.tarea.CopyDirTarea;
-import com.lea87crzz.AutoPublish.object.tarea.CopyFileTarea;
-import com.lea87crzz.AutoPublish.object.tarea.ExcecuteCommand;
-import com.lea87crzz.AutoPublish.object.tarea.MavenPackage;
+import com.lea87crzz.AutoPublish.object.Process;
+import com.lea87crzz.AutoPublish.object.tarea.CleanDirTask;
+import com.lea87crzz.AutoPublish.object.tarea.CopyDirTask;
+import com.lea87crzz.AutoPublish.object.tarea.CopyFileTask;
+import com.lea87crzz.AutoPublish.object.tarea.ExcecuteCommandTask;
+import com.lea87crzz.AutoPublish.object.tarea.MavenPackageTask;
 
 public class TestTareas {
 
 	public static void main(String[] args) {
-		Proceso proc=new Proceso();
+		Process proc=new Process();
 		
 		String srcDspace="C:\\Users\\lpujol\\git\\dspace6base\\";
 		String tomcatWebapps="C:\\usr\\local\\tomcat\\webapps\\";
 		
-		Proceso compilarApi=new Proceso("Compilar dspace-api");
-		compilarApi.agregarTarea(new MavenPackage(srcDspace+"dspace-api"));
-		compilarApi.agregarTarea(new CopyFileTarea(srcDspace+"dspace-api\\target\\",
+		Process compilarApi=new Process("Compilar dspace-api");
+		compilarApi.addTask(new MavenPackageTask(srcDspace+"dspace-api"));
+		compilarApi.addTask(new CopyFileTask(srcDspace+"dspace-api\\target\\",
 				"C:\\Users\\lpujol\\.m2\\repository\\org\\dspace\\dspace-api\\6.0\\",
 				"dspace-api-6.0.jar"));
 		
 		
-		Proceso compilarJSPUI=new Proceso("Compilar dspace-jspui");
-		compilarJSPUI.agregarTarea(new MavenPackage(srcDspace+"dspace-jspui"));
-		compilarJSPUI.agregarTarea(new CopyDirTarea(srcDspace+"dspace-jspui\\target\\dspace-jspui-6.0\\",
+		Process compilarJSPUI=new Process("Compilar dspace-jspui");
+		compilarJSPUI.addTask(new MavenPackageTask(srcDspace+"dspace-jspui"));
+		compilarJSPUI.addTask(new CopyDirTask(srcDspace+"dspace-jspui\\target\\dspace-jspui-6.0\\",
 				tomcatWebapps+"admin\\"));
 		
-		Proceso compilarXMLUI=new Proceso("Compilar dspace-jspui");
-		compilarXMLUI.agregarTarea(new MavenPackage(srcDspace+"dspace-xmlui"));
-		compilarXMLUI.agregarTarea(new CopyDirTarea(srcDspace+"dspace-xmlui\\target\\dspace-xmlui-6.0\\",
+		Process compilarXMLUI=new Process("Compilar dspace-jspui");
+		compilarXMLUI.addTask(new MavenPackageTask(srcDspace+"dspace-xmlui"));
+		compilarXMLUI.addTask(new CopyDirTask(srcDspace+"dspace-xmlui\\target\\dspace-xmlui-6.0\\",
 				tomcatWebapps+"ROOT\\"));
 		
-		Proceso levantarTomcat=new Proceso("Levantar tomcat");
-		levantarTomcat.agregarTarea(new CleanDirTarea("C:\\usr\\local\\dspace\\log\\"));
-		levantarTomcat.agregarTarea(new CleanDirTarea("C:\\usr\\local\\tomcat\\logs\\"));
-		levantarTomcat.agregarTarea(new ExcecuteCommand("C:\\usr\\local\\tomcat\\bin\\","startup.bat"));
+		Process levantarTomcat=new Process("Levantar tomcat");
+		levantarTomcat.addTask(new CleanDirTask("C:\\usr\\local\\dspace\\log\\"));
+		levantarTomcat.addTask(new CleanDirTask("C:\\usr\\local\\tomcat\\logs\\"));
+		levantarTomcat.addTask(new ExcecuteCommandTask("C:\\usr\\local\\tomcat\\bin\\","startup.bat"));
 		
-		proc.agregarTarea(levantarTomcat);		
-		proc.ejecutar();
+		proc.addTask(levantarTomcat);		
+		proc.execute();
 
 	}
 

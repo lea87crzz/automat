@@ -5,33 +5,33 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
-import com.lea87crzz.AutoPublish.object.Resultado;
+import com.lea87crzz.AutoPublish.object.Result;
 
-public class CopyFileTarea extends Tarea {
+public class CopyFileTask extends Task {
 	
 	private String fromPath;
 	private String toPath;
 	private String fileName;
 	
-	public CopyFileTarea() {
+	public CopyFileTask() {
 	}
 	
-	public CopyFileTarea(String from,String to,String file) {
+	public CopyFileTask(String from,String to,String file) {
 		fromPath=from;
 		toPath=to;
 		fileName=file;
 	}
 	
 	@Override
-	public boolean ejecutar() {		
+	public boolean execute() {		
 		try{
 			Path source=new File(fromPath+fileName).toPath();
 			Path dest=new File(toPath).toPath();
 			Files.copy(source, dest.resolve(source.getFileName()),StandardCopyOption.REPLACE_EXISTING);
-			result=Resultado.OK;
+			result=Result.OK;
 			return true;
 		} catch(Exception e){
-			result=Resultado.ERROR;
+			result=Result.ERROR;
 		}
 		return false;
 	}
@@ -61,7 +61,7 @@ public class CopyFileTarea extends Tarea {
 	}
 	
 	@Override
-	public String getDescripcion() {
+	public String getDescription() {
 		return "CP "+fromPath+fileName+" TO "+toPath;
 	}
 

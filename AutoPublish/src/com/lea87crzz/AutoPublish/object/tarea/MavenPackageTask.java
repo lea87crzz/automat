@@ -4,27 +4,27 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 
-import com.lea87crzz.AutoPublish.object.Resultado;
+import com.lea87crzz.AutoPublish.object.Result;
 
-public class ExcecuteCommand extends Tarea {
+public class MavenPackageTask extends Task {
 
-	private String cmd;
+	public static String MAVEN_PATH = "C:\\maven\\bin\\mvn.cmd";
+
 	private String path;
-	
-	public ExcecuteCommand() {		
+
+	public MavenPackageTask() {
 	}
-	
-	public ExcecuteCommand(String path,String cmd) {
-		this.path=path;
-		this.cmd=cmd;
+
+	public MavenPackageTask(String path) {
+		this.path = path;
 	}
-	
-	
+
 	@Override
-	public boolean ejecutar() {
+	public boolean execute() {
 		try {
 			File dir = new File(path);
-			ProcessBuilder pb = new ProcessBuilder(path+cmd);
+
+			ProcessBuilder pb = new ProcessBuilder(MAVEN_PATH, "package");
 			pb.directory(dir);
 
 			Process p = pb.start();
@@ -36,17 +36,17 @@ public class ExcecuteCommand extends Tarea {
 				System.out.println(++i + " " + readline);
 			}
 
-			result = Resultado.OK;
+			result = Result.OK;
 			return true;
 		} catch (Exception e) {
-			result = Resultado.ERROR;
+			result = Result.ERROR;
 		}
 		return false;
 	}
 
 	@Override
-	public String getDescripcion() {
-		return "EJECUTA "+cmd;
+	public String getDescription() {
+		return "MVN PACKAGE en " + path;
 	}
 
 }
