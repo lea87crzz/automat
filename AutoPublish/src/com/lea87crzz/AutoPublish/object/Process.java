@@ -30,10 +30,10 @@ public class Process implements ITask {
 			t.execute();
 			result=t.getResult();
 			if(t.getResult().equals(Result.ERROR)){
-				System.out.println("ERROR AL EJECUTAR TAREA");
+				System.out.println("EXCECUTION ERROR IN TASK");
 				return false;
 			} else{
-				System.out.println("FINALIZADO CORRECTAMENTE");
+				System.out.println("TASK COMPLETED");
 			}
 		}
 		return true;
@@ -48,7 +48,7 @@ public class Process implements ITask {
 
 	@Override
 	public String getDescription() {
-		return "PROCESO "+name;
+		return "PROCESS "+name;
 	}
 
 }

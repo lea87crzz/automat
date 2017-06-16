@@ -46,7 +46,7 @@ public class MavenPackageTask extends Task {
 
 	@Override
 	public String getDescription() {
-		return "MVN PACKAGE en " + path;
+		return "MVN PACKAGE on " + path;
 	}
 
 }

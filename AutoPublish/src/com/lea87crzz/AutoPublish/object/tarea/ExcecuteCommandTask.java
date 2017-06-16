@@ -46,7 +46,7 @@ public class ExcecuteCommandTask extends Task {
 
 	@Override
 	public String getDescription() {
-		return "EJECUTA "+cmd;
+		return "EXCEC "+cmd;
 	}
 
 }
