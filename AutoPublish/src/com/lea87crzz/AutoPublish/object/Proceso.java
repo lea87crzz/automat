@@ -21,6 +21,12 @@ public class Proceso {
 		for(ITarea t:tareas){
 			System.out.println(t.getDescripcion());
 			t.ejecutar();
+			if(t.getResultado().equals(Resultado.ERROR)){
+				System.out.println("ERROR AL EJECUTAR TAREA");
+				break;
+			} else{
+				System.out.println("FINALIZADO CORRECTAMENTE");
+			}
 		}
 		
 	}
