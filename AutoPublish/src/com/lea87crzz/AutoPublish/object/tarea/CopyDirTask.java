@@ -11,10 +11,12 @@ public class CopyDirTask extends Task {
 	private String fromPath;
 	private String toPath;
 
-	public CopyDirTask() {
+	public CopyDirTask(String name) {
+		super(name);
 	}
 
-	public CopyDirTask(String from, String to) {
+	public CopyDirTask(String name,String from, String to) {
+		super(name);
 		fromPath = from;
 		toPath = to;
 	}

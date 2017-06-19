@@ -12,10 +12,12 @@ public class MavenPackageTask extends Task {
 
 	private String path;
 
-	public MavenPackageTask() {
+	public MavenPackageTask(String name) {
+		super(name);
 	}
 
-	public MavenPackageTask(String path) {
+	public MavenPackageTask(String name,String path) {
+		super(name);
 		this.path = path;
 	}
 

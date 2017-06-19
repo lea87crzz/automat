@@ -10,10 +10,12 @@ public class CleanDirTask extends Task {
 	
 	private String path;
 	
-	public CleanDirTask() {
+	public CleanDirTask(String name) {
+		super(name);
 	}
 	
-	public CleanDirTask(String path) {
+	public CleanDirTask(String name,String path) {
+		super(name);
 		this.path=path;
 	}
 

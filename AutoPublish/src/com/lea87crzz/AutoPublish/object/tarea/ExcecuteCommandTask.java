@@ -11,10 +11,12 @@ public class ExcecuteCommandTask extends Task {
 	private String cmd;
 	private String path;
 	
-	public ExcecuteCommandTask() {		
+	public ExcecuteCommandTask(String name) {
+		super(name);
 	}
 	
-	public ExcecuteCommandTask(String path,String cmd) {
+	public ExcecuteCommandTask(String name,String path,String cmd) {
+		super(name);
 		this.path=path;
 		this.cmd=cmd;
 	}

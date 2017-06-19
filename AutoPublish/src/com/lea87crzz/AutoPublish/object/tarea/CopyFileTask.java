@@ -13,10 +13,12 @@ public class CopyFileTask extends Task {
 	private String toPath;
 	private String fileName;
 	
-	public CopyFileTask() {
+	public CopyFileTask(String name) {
+		super(name);
 	}
 	
-	public CopyFileTask(String from,String to,String file) {
+	public CopyFileTask(String name,String from,String to,String file) {
+		super(name);
 		fromPath=from;
 		toPath=to;
 		fileName=file;

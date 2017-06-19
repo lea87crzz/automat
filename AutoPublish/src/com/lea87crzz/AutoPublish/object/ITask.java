@@ -7,4 +7,6 @@ public interface ITask {
 	public Result getResult();
 	
 	public String getDescription();
+	
+	public String getName();
 }

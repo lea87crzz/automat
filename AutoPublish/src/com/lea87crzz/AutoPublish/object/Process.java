@@ -16,7 +16,7 @@ public class Process implements ITask {
 		tasks=new ArrayList<ITask>();
 	}
 	
-	public ArrayList<ITask> getTareas(){
+	public ArrayList<ITask> getTasks(){
 		return this.tasks;
 	}
 	
@@ -38,6 +38,10 @@ public class Process implements ITask {
 		}
 		return true;
 		
+	}
+	
+	public String getName(){
+		return name;
 	}
 
 
