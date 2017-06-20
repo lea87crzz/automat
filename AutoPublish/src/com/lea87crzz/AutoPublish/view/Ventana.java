@@ -5,11 +5,16 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.PrintStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreeNode;
@@ -31,6 +36,7 @@ public class Ventana extends JPanel {
     	Process p=TestLea.getProcessDspace6();
         TreeNode yourRoot = ViewUtil.getTreeNodeFromProcess(p);
         
+        createMenu();
         
         CapturePane cp=new CapturePane();
         CheckboxTree checkboxTree = new CheckboxTree(yourRoot);
@@ -55,9 +61,9 @@ public class Ventana extends JPanel {
         
         GridBagConstraints constraintscb = new GridBagConstraints();
         constraintscb.gridx = 0;
-        constraintscb.gridy = 0;
+        constraintscb.gridy = 1;
         constraintscb.gridwidth = 1;
-        constraintscb.gridheight = 2;
+        constraintscb.gridheight = 1;
         constraintscb.weighty = 1.0;
         constraintscb.fill=GridBagConstraints.VERTICAL;
         constraintscb.anchor = GridBagConstraints.NORTHWEST;
@@ -84,14 +90,11 @@ public class Ventana extends JPanel {
 				temp.execute();
 			}
 		});
-        //b1.setVerticalTextPosition(AbstractButton.CENTER);
-        //b1.setHorizontalTextPosition(AbstractButton.LEADING); 
         GridBagConstraints  constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 2;
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
-        constraints.anchor = GridBagConstraints.SOUTHWEST;
         add(b1,constraints);      
         
         GridBagConstraints  constraintsT = new GridBagConstraints();
@@ -114,7 +117,52 @@ public class Ventana extends JPanel {
 	
    
     
-    private static void createAndShowGUI() {    	 
+    private void createMenu() {
+    	//Create the menu bar.
+    	JMenuBar menuBar = new JMenuBar();
+
+    	//Build the first menu.
+    	JMenu menu = new JMenu("File");	
+    	menuBar.add(menu);    	
+    	JMenuItem menuItem = new JMenuItem("Open");		
+		menu.add(menuItem);
+		menuItem = new JMenuItem("Save");		
+		menu.add(menuItem);
+		menuItem = new JMenuItem("Save as...");		
+		menu.add(menuItem);
+		menuItem = new JMenuItem("Exit");	
+		menuItem.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		menu.add(menuItem);
+    	
+		
+		menu = new JMenu("Help");	
+	    menuBar.add(menu);
+	    menuItem = new JMenuItem("About");		
+		menu.add(menuItem);
+	    	
+	    	
+    	  GridBagConstraints constraintscb = new GridBagConstraints();
+          constraintscb.gridx = 0;
+          constraintscb.gridy = 0;
+          constraintscb.gridwidth = 1;
+          constraintscb.gridheight = 2;
+          constraintscb.fill=GridBagConstraints.HORIZONTAL;
+          constraintscb.anchor=GridBagConstraints.EAST;
+          constraintscb.weightx = 1.0;
+    	add(menuBar,constraintscb);
+    	
+    	
+		
+	}
+
+
+
+	private static void createAndShowGUI() {    	 
         //Create and set up the window.
         JFrame frame = new JFrame("Automata");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
