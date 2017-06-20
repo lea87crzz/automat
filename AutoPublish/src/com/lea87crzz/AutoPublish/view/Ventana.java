@@ -1,6 +1,7 @@
 package com.lea87crzz.AutoPublish.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -35,6 +36,8 @@ public class Ventana extends JPanel {
         
         CheckboxTree checkboxTree = new CheckboxTree(yourRoot);
         checkboxTree.expandAll();
+        
+        setPreferredSize(new Dimension(700, 400));
         
         GridBagLayout layout=new GridBagLayout();        
         setLayout(layout);
