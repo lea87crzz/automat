@@ -6,9 +6,13 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.PrintStream;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -31,10 +35,14 @@ public class Ventana extends JPanel {
 
 	private static final long serialVersionUID = -1262635960024699178L;
 	
+	private Process openProc;
+	final JFileChooser fc = new JFileChooser();
+
+	
 
 	private Ventana() {    	
-    	Process p=TestLea.getProcessDspace6();
-        TreeNode yourRoot = ViewUtil.getTreeNodeFromProcess(p);
+		openProc=TestLea.getProcessDspace6();
+        TreeNode yourRoot = ViewUtil.getTreeNodeFromProcess(openProc);
         
         createMenu();
         
@@ -69,7 +77,7 @@ public class Ventana extends JPanel {
         constraintscb.anchor = GridBagConstraints.NORTHWEST;
         add(checkboxTree,constraintscb);
         
-    	JButton b1 = new JButton("EXCECUTE");
+    	JButton b1 = new JButton(LocaleUtils.getString("button.excecute"));
         b1.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -122,15 +130,31 @@ public class Ventana extends JPanel {
     	JMenuBar menuBar = new JMenuBar();
 
     	//Build the first menu.
-    	JMenu menu = new JMenu("File");	
+    	JMenu menu = new JMenu(LocaleUtils.getString("menu.file"));	
     	menuBar.add(menu);    	
-    	JMenuItem menuItem = new JMenuItem("Open");		
+    	JMenuItem menuItem = new JMenuItem(LocaleUtils.getString("menu.open"));		
+    	menuItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int returnVal = fc.showOpenDialog(Ventana.this);
+
+		        if (returnVal == JFileChooser.APPROVE_OPTION) {
+		            File file = fc.getSelectedFile();
+		            //This is where a real application would open the file.
+		            System.out.println("Opening: " + file.getName() + ".");
+		        } else {
+		        	System.out.println("Open command cancelled by user.");
+		        }
+				
+			}
+		});
 		menu.add(menuItem);
-		menuItem = new JMenuItem("Save");		
+		menuItem = new JMenuItem(LocaleUtils.getString("menu.save"));		
 		menu.add(menuItem);
-		menuItem = new JMenuItem("Save as...");		
+		menuItem = new JMenuItem(LocaleUtils.getString("menu.saveAs"));		
 		menu.add(menuItem);
-		menuItem = new JMenuItem("Exit");	
+		menuItem = new JMenuItem(LocaleUtils.getString("menu.exit"));	
 		menuItem.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -140,17 +164,17 @@ public class Ventana extends JPanel {
 		menu.add(menuItem);
     	
 		
-		menu = new JMenu("Help");	
+		menu = new JMenu(LocaleUtils.getString("menu.help"));	
 	    menuBar.add(menu);
-	    menuItem = new JMenuItem("About");		
+	    menuItem = new JMenuItem(LocaleUtils.getString("menu.about"));		
 		menu.add(menuItem);
 	    	
 	    	
     	  GridBagConstraints constraintscb = new GridBagConstraints();
           constraintscb.gridx = 0;
           constraintscb.gridy = 0;
-          constraintscb.gridwidth = 1;
-          constraintscb.gridheight = 2;
+          constraintscb.gridwidth = 2;
+          constraintscb.gridheight = 1;
           constraintscb.fill=GridBagConstraints.HORIZONTAL;
           constraintscb.anchor=GridBagConstraints.EAST;
           constraintscb.weightx = 1.0;

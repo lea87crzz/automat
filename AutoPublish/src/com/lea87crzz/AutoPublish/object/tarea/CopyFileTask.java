@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
 import com.lea87crzz.AutoPublish.object.Result;
+import com.lea87crzz.AutoPublish.view.LocaleUtils;
 
 public class CopyFileTask extends Task {
 	
@@ -64,7 +65,7 @@ public class CopyFileTask extends Task {
 	
 	@Override
 	public String getDescription() {
-		return "CP "+fromPath+fileName+" TO "+toPath;
+		return "CP "+fromPath+fileName+" "+LocaleUtils.getString("task.cp.to")+" "+toPath;
 	}
 
 

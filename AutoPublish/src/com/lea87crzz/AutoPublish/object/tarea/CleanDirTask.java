@@ -5,6 +5,7 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 
 import com.lea87crzz.AutoPublish.object.Result;
+import com.lea87crzz.AutoPublish.view.LocaleUtils;
 
 public class CleanDirTask extends Task {
 	
@@ -34,7 +35,7 @@ public class CleanDirTask extends Task {
 
 	@Override
 	public String getDescription() {
-		return "CLEAN "+path;
+		return LocaleUtils.getString("task.clean.description")+" "+path;
 	}
 
 }

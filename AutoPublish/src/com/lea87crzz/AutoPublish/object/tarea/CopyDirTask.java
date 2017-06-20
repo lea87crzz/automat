@@ -5,6 +5,7 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 
 import com.lea87crzz.AutoPublish.object.Result;
+import com.lea87crzz.AutoPublish.view.LocaleUtils;
 
 public class CopyDirTask extends Task {
 
@@ -37,7 +38,7 @@ public class CopyDirTask extends Task {
 
 	@Override
 	public String getDescription() {
-		return "CP " + fromPath + " TO " + toPath;
+		return "CP " + fromPath + " "+LocaleUtils.getString("task.cp.to")+" " + toPath;
 	}
 
 }

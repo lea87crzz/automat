@@ -2,6 +2,8 @@ package com.lea87crzz.AutoPublish.object;
 
 import java.util.ArrayList;
 
+import com.lea87crzz.AutoPublish.view.LocaleUtils;
+
 public class Process implements ITask {
 	ArrayList<ITask> tasks;
 	private String name="";
@@ -30,10 +32,10 @@ public class Process implements ITask {
 			t.execute();
 			result=t.getResult();
 			if(t.getResult().equals(Result.ERROR)){
-				System.out.println("EXCECUTION ERROR IN TASK");
+				System.out.println(LocaleUtils.getString("process.error"));
 				return false;
 			} else{
-				System.out.println("TASK COMPLETED");
+				System.out.println(LocaleUtils.getString("process.completed"));
 			}
 		}
 		return true;
@@ -52,7 +54,7 @@ public class Process implements ITask {
 
 	@Override
 	public String getDescription() {
-		return "PROCESS "+name;
+		return LocaleUtils.getString("process.description")+" "+name;
 	}
 
 }

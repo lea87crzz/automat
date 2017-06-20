@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.InputStreamReader;
 
 import com.lea87crzz.AutoPublish.object.Result;
+import com.lea87crzz.AutoPublish.view.LocaleUtils;
 
 public class MavenPackageTask extends Task {
 
@@ -47,7 +48,7 @@ public class MavenPackageTask extends Task {
 
 	@Override
 	public String getDescription() {
-		return "MVN PACKAGE on " + path;
+		return "MVN PACKAGE "+LocaleUtils.getString("task.mvn.on")+" " + path;
 	}
 
 }
