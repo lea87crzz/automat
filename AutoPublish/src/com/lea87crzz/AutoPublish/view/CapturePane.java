@@ -9,11 +9,14 @@ import javax.swing.JTextArea;
 
 public class CapturePane extends JPanel implements Consumer {
 
-    private JTextArea output;
+
+	private static final long serialVersionUID = 8629507342258453712L;
+	private JTextArea output;
 
     public CapturePane() {
         setLayout(new BorderLayout());
         output = new JTextArea();
+        output.setLineWrap(true);
         add(new JScrollPane(output));
     }
 
@@ -32,5 +35,9 @@ public class CapturePane extends JPanel implements Consumer {
             });
 
         }
-    }        
+    }    
+    
+    public void clear(){
+    	output.setText("");
+    }
 }

@@ -1,11 +1,8 @@
 package com.lea87crzz.AutoPublish.view;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintStream;
@@ -13,8 +10,8 @@ import java.io.PrintStream;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
@@ -34,8 +31,22 @@ public class Ventana extends JPanel {
     	Process p=TestLea.getProcessDspace6();
         TreeNode yourRoot = ViewUtil.getTreeNodeFromProcess(p);
         
+        
+        CapturePane cp=new CapturePane();
         CheckboxTree checkboxTree = new CheckboxTree(yourRoot);
         checkboxTree.expandAll();
+        
+        checkboxTree.addTreeSelectionListener(new TreeSelectionListener() {
+			
+			@Override
+			public void valueChanged(TreeSelectionEvent arg0) {
+				TreeNodeTask tnt=(TreeNodeTask)arg0.getPath().getLastPathComponent();
+				cp.clear();
+				System.out.println(tnt.getTask().getName());
+				System.out.println(tnt.getTask().getDescription());
+				
+			}
+		});
         
         setPreferredSize(new Dimension(700, 400));
         
@@ -56,6 +67,7 @@ public class Ventana extends JPanel {
         b1.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				cp.clear();
 				TreePath[] checks=checkboxTree.getCheckingPaths();
 				System.out.println(checks);
 				Process temp=new Process("");
@@ -92,7 +104,6 @@ public class Ventana extends JPanel {
         constraintsT.fill = GridBagConstraints.BOTH;
         constraintsT.anchor = GridBagConstraints.EAST;
         
-        CapturePane cp=new CapturePane();
         PrintStream ps = System.out;
         System.setOut(new PrintStream(new StreamCapturer(cp, ps)));
         add(cp,constraintsT); 

@@ -32,7 +32,6 @@ public class MavenPackageTask extends Task {
 			Process p = pb.start();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			String readline;
-			int i = 0;
 			while ((readline = reader.readLine()) != null) {
 				//if(readline.contains("BUILD"))
 				System.out.println(readline);
