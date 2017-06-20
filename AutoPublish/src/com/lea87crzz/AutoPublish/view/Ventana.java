@@ -1,11 +1,19 @@
 package com.lea87crzz.AutoPublish.view;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.PrintStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
@@ -28,7 +36,18 @@ public class Ventana extends JPanel {
         CheckboxTree checkboxTree = new CheckboxTree(yourRoot);
         checkboxTree.expandAll();
         
-        add(checkboxTree);
+        GridBagLayout layout=new GridBagLayout();        
+        setLayout(layout);
+        
+        GridBagConstraints constraintscb = new GridBagConstraints();
+        constraintscb.gridx = 0;
+        constraintscb.gridy = 0;
+        constraintscb.gridwidth = 1;
+        constraintscb.gridheight = 2;
+        constraintscb.weighty = 1.0;
+        constraintscb.fill=GridBagConstraints.VERTICAL;
+        constraintscb.anchor = GridBagConstraints.NORTHWEST;
+        add(checkboxTree,constraintscb);
         
     	JButton b1 = new JButton("EXCECUTE");
         b1.addActionListener(new ActionListener() {			
@@ -51,11 +70,40 @@ public class Ventana extends JPanel {
 			}
 		});
         //b1.setVerticalTextPosition(AbstractButton.CENTER);
-        //b1.setHorizontalTextPosition(AbstractButton.LEADING);  
+        //b1.setHorizontalTextPosition(AbstractButton.LEADING); 
+        GridBagConstraints  constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.gridwidth = 1;
+        constraints.gridheight = 1;
+        constraints.anchor = GridBagConstraints.SOUTHWEST;
+        add(b1,constraints);      
         
-        add(b1);        
+        GridBagConstraints  constraintsT = new GridBagConstraints();
+        constraintsT.gridx = 1;
+        constraintsT.gridy = 1;
+        constraintsT.gridwidth = 2;
+        constraintsT.gridheight = 2;
+        constraintsT.weighty = 1.0;
+        constraintsT.weightx = 1.0;
+        constraintsT.fill = GridBagConstraints.BOTH;
+        constraintsT.anchor = GridBagConstraints.EAST;
+        
+        
+        JTextArea ta = new JTextArea();
+        JScrollPane sp = new JScrollPane(ta);
+        
+        
+        CapturePane cp=new CapturePane();
+        PrintStream ps = System.out;
+        System.setOut(new PrintStream(new StreamCapturer(cp, ps)));
+        add(cp,constraintsT); 
+        
+        
+
     }
-    
+	
+   
     
     private static void createAndShowGUI() {    	 
         //Create and set up the window.

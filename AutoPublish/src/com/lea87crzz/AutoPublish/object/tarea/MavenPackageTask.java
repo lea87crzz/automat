@@ -35,7 +35,7 @@ public class MavenPackageTask extends Task {
 			int i = 0;
 			while ((readline = reader.readLine()) != null) {
 				//if(readline.contains("BUILD"))
-				System.out.println(++i + " " + readline);
+				System.out.println(readline);
 			}
 
 			result = Result.OK;
