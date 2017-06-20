@@ -89,11 +89,6 @@ public class Ventana extends JPanel {
         constraintsT.fill = GridBagConstraints.BOTH;
         constraintsT.anchor = GridBagConstraints.EAST;
         
-        
-        JTextArea ta = new JTextArea();
-        JScrollPane sp = new JScrollPane(ta);
-        
-        
         CapturePane cp=new CapturePane();
         PrintStream ps = System.out;
         System.setOut(new PrintStream(new StreamCapturer(cp, ps)));
