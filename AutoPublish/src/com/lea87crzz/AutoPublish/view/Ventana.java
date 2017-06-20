@@ -5,11 +5,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.PrintStream;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -18,9 +15,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
@@ -43,6 +40,9 @@ public class Ventana extends JPanel {
 	private Ventana() {    	
 		openProc=TestLea.getProcessDspace6();
         TreeNode yourRoot = ViewUtil.getTreeNodeFromProcess(openProc);
+        
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "XML", "xml");
         
         createMenu();
         
