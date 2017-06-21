@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.PrintStream;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -85,17 +86,38 @@ public class Ventana extends JPanel {
 				TreePath[] checks=checkboxTree.getCheckingPaths();
 				System.out.println(checks);
 				Process temp=new Process("");
+				for(ITask task:openProc.getTasks()){
+					if(isTaskChecked(task,checks)){
+						//TODO checkear tareas de 3er nivel
+						if(task instanceof Process){
+							temp.addTask(new Process(task.getName()));
+							Process tempProcess=(Process)task;
+							for(ITask subtask:tempProcess.getTasks()){
+								if(isTaskChecked(subtask,checks)){
+									temp.addTask(subtask);
+								}
+							}
+							
+						} else{
+							temp.addTask(task);
+						}
+					}
+					
+					
+				}				
+				temp.execute();
+			}
+
+			private boolean isTaskChecked(ITask task, TreePath[] checks) {
 				for(int i=0;i<checks.length;i++){
 					TreeNodeTask nodeTask=(TreeNodeTask)checks[i].getLastPathComponent();
-					ITask task=nodeTask.getTask();
-					
-					if(task instanceof Process){
-						temp.addTask(new Process(task.getName()));
-					} else{
-						temp.addTask(task);
+					ITask ntask=nodeTask.getTask();
+					if(ntask.equals(task)){
+						return true;
 					}
+					
 				}
-				temp.execute();
+				return false;
 			}
 		});
         GridBagConstraints  constraints = new GridBagConstraints();
@@ -191,6 +213,10 @@ public class Ventana extends JPanel {
         JFrame frame = new JFrame("Automata");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 700);
+        
+        ImageIcon img = new ImageIcon("res/icon.png");
+        frame.setIconImage(img.getImage());
+        
         //Create and set up the content pane.
         Ventana newContentPane = new Ventana();
         newContentPane.setOpaque(true); //content panes must be opaque
