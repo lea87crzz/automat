@@ -50,6 +50,7 @@ public class Ventana extends JPanel {
         CapturePane cp=new CapturePane();
         CheckboxTree checkboxTree = new CheckboxTree(yourRoot);
         checkboxTree.expandAll();
+        checkboxTree.setMinimumSize(new Dimension(250, 1));
         
         checkboxTree.addTreeSelectionListener(new TreeSelectionListener() {
 			
