@@ -27,6 +27,11 @@ public class TestLea {
 		compilarJSPUI.addTask(new CopyDirTask("Cp dspace-jspui",srcDspace+"dspace-jspui\\target\\dspace-jspui-6.0\\",
 				tomcatWebapps+"admin\\"));
 		
+		Process compilarAutoridades=new Process("Compilar autoridades");
+		compilarAutoridades.addTask(new MavenPackageTask("Mvn autoridades",srcDspace+"dspace-autoridades"));
+		compilarAutoridades.addTask(new CopyDirTask("Cp dspace-autoridades",srcDspace+"dspace-autoridades\\target\\autoridades\\",
+				tomcatWebapps+"autoridades\\"));
+		
 		Process compilarXMLUI=new Process("Compilar dspace-xmlui");
 		compilarXMLUI.addTask(new MavenPackageTask("Mvn dspace-xmlui",srcDspace+"dspace-xmlui"));
 		compilarXMLUI.addTask(new CopyDirTask("Cp dspace-xmlui",srcDspace+"dspace-xmlui\\target\\dspace-xmlui-6.0\\",
@@ -40,6 +45,7 @@ public class TestLea {
 		
 		proc.addTask(compilarApi);
 		proc.addTask(compilarJSPUI);
+		proc.addTask(compilarAutoridades);		
 		proc.addTask(compilarXMLUI);
 		proc.addTask(levantarTomcat);
 		
